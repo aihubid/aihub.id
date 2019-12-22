@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Installasi - My Docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Installasi";
+    var mkdocs_page_input_path = "installasi.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> My Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../opensource/">Teknologi</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Installasi</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#installasi-bigq-manager-di-ubuntu-1604-server-dalam-ekosistim-lxd">Installasi BigQ Manager di Ubuntu 16.04 Server Dalam Ekosistim LXD</a></li>
+    
+
+    <li class="toctree-l2"><a href="#installasi-lxd">Installasi LXD</a></li>
+    
+
+    <li class="toctree-l2"><a href="#konfigurasi-ip-address-server-lxd">Konfigurasi ip address  server LXD</a></li>
+    
+
+    <li class="toctree-l2"><a href="#download-dan-buat-container-barebone-linux">Download dan buat container Barebone-Linux</a></li>
+    
+
+    <li class="toctree-l2"><a href="#buat-hadoop-container">Buat Hadoop Container</a></li>
+    
+
+    <li class="toctree-l2"><a href="#buat-user-penanggung-jawab-hadoop">Buat user penanggung jawab Hadoop</a></li>
+    
+
+    <li class="toctree-l2"><a href="#rubah-konfigurasi-ssh-server">Rubah konfigurasi ssh server</a></li>
+    
+
+    <li class="toctree-l2"><a href="#upgrade-container">Upgrade Container</a></li>
+    
+
+    <li class="toctree-l2"><a href="#sesuaikan-zone-waktu">Sesuaikan Zone Waktu</a></li>
+    
+
+    <li class="toctree-l2"><a href="#install-java">Install Java</a></li>
+    
+
+    <li class="toctree-l2"><a href="#install-hadoop-custom-package">Install Hadoop Custom Package</a></li>
+    
+
+    <li class="toctree-l2"><a href="#konfigurasi-hadoop">Konfigurasi Hadoop</a></li>
+    
+
+    <li class="toctree-l2"><a href="#create-image-template-hadoop-dari-container">Create Image Template Hadoop dari Container</a></li>
+    
+
+    <li class="toctree-l2"><a href="#installasi-apache-spark">Installasi Apache Spark</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#buat-user-penanggung-jawab-spark">Buat user penanggung jawab Spark</a></li>
+        
+            <li><a class="toctree-l3" href="#install-spark-custom-package">Install Spark Custom Package</a></li>
+        
+            <li><a class="toctree-l3" href="#create-image-template-spark-dari-container">Create Image Template Spark dari Container</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#installasi-bigq-manager">Installasi BigQ Manager</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#installasi-python3-development">Installasi python3 development</a></li>
+        
+            <li><a class="toctree-l3" href="#installasi-custom-odoo-11-server">Installasi Custom Odoo 11 Server</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">My Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Installasi</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h4 id="installasi-bigq-manager-di-ubuntu-1604-server-dalam-ekosistim-lxd">Installasi BigQ Manager di Ubuntu 16.04 Server Dalam Ekosistim LXD</h4>
+<hr />
+<p>Rangkaian perintah di buku petunjuk ini dibagi menjadi dua, perintah di host komputer ditandai dengan <strong>:host</strong> dan perintah di container ditandai dengan <strong>:container</strong> diasumsikan user yang berada di host adalah <strong>myuser</strong> dengan host <strong>desktop</strong> menggunakan sistem operasi Ubuntu Desktop 16.04 atau 18.04 atau 19.04</p>
+<h4 id="installasi-lxd">Installasi LXD</h4>
+<p>LXD mempermudah anda untuk mencoba sistem tata kelola big data Aihub Generasi Kedua, sehingga anda dapat mencobanya di laptop terlebih dahulu. Kebutuhan umum untuk menjalankan sistem ini adalah, Ubuntu 19.04 Desktop atau Ubuntu 18.04 Server dengan ram minimal 16 GB dan prosesor minimal 4 cores, ikuti petunjuk Installasi  LXD di host komputer.</p>
+<p><strong>:host</strong> </p>
+<pre><code>myuser@desktop:~$ sudo snap install lxd
+</code></pre>
+
+<p>Diasumsikan LXD sudah terinstall di host komputer , cek apakah group lxd sudah ada</p>
+<pre><code>myuser@desktop:~$ groups
+</code></pre>
+
+<p>hasil perintah di atas adalah :</p>
+<blockquote>
+<p><code>myuser adm cdrom sudo dip plugdev lpadmin lxd sambashare</code></p>
+</blockquote>
+<p>cek apakah user myuser sudah masuk ke dalam group lxd</p>
+<pre><code>myuser@desktop:~$ id
+</code></pre>
+
+<p>hasil dari perintah diatas adalah </p>
+<blockquote>
+<p><code>uid=1000(myuser) gid=1000(myuser) groups=1000(myuser),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),119(lpadmin),**130(lxd)**,131(sambashare)</code></p>
+</blockquote>
+<p>jika myuser belum masuk ke dalam group lxd, lakukan perintah di bawah ini, untuk beberapa kasus harus dilakukan reboot agar user bisa masuk ke dalam group</p>
+<pre><code>myuser@desktop:~$ usermod -a -G lxd username-di-host
+myuser@desktop:~$ sudo reboot
+</code></pre>
+
+<p>jalankan inisialisasi lxd</p>
+<pre><code>myuser@desktop:~$ lxd init
+</code></pre>
+
+<h4 id="konfigurasi-ip-address-server-lxd">Konfigurasi ip address  server LXD</h4>
+<hr />
+<p>Setting dhcp lxd server, pada keaadan default interface adalah <strong>lxdbr0</strong>. pastikan semua container tidak ada yang jalan!</p>
+<p><strong>:host</strong></p>
+<pre><code>myuser@desktop:~$ lxc list
+myuser@desktop:~$ lxc network edit lxdbr0
+</code></pre>
+
+<p>rubah ipv4.address dan sesuaikan dengan ip yg dkehendaki, tambahkan dhcp entry bila diperlukan, misalnya seperti dibawah ini</p>
+<pre><code>config:
+  ipv4.address: 10.10.10.100/24
+  ipv4.nat: &quot;true&quot;
+  ipv6.address: fd42:b943:aa56:2293::1/64
+  ipv6.nat: &quot;true&quot;
+description: &quot;&quot;
+name: lxdbr0
+type: bridge
+used_by:
+- /1.0/containers/barebones
+  managed: true
+  status: Created
+  locations:
+- none
+</code></pre>
+
+<p>jika diperlukan untuk dhcp bisa tambahkan entry ke section config</p>
+<pre><code>  ipv4.dhcp: &quot;true&quot;
+  ipv4.dhcp.ranges: 10.10.10.105-10.10.10.120
+</code></pre>
+
+<p>Reload lxd</p>
+<pre><code>myuser@desktop:~$ sudo systemctl reload snap.lxd.daemon.service
+</code></pre>
+
+<h4 id="download-dan-buat-container-barebone-linux">Download dan buat container Barebone-Linux</h4>
+<hr />
+<p>Agar proses cepat, kita akan simpan barebone Ubuntu 16.04 dari images repository ubuntu ke local image sebagai barebone bahan baku</p>
+<p><strong>:host</strong></p>
+<pre><code>myuser@desktop:~$ lxc launch ubuntu:16.04 ubuntu
+myuser@desktop:~$ lxc stop ubuntu
+myuser@desktop:~$ lxc publish ubuntu -- alias barebone
+myuser@desktop:~$ lxc image delete ubuntu
+</code></pre>
+
+<p>di tahap ini kita sudah mempunyai image baru bernama barebone</p>
+<h4 id="buat-hadoop-container">Buat Hadoop Container</h4>
+<hr />
+<p><strong>:host</strong></p>
+<pre><code>myuser@desktop:~$ lxc launch barebone hadoop-raw
+myuser@desktop:~$ lxc exec hadoop-raw -- /bin/bash
+</code></pre>
+
+<h4 id="buat-user-penanggung-jawab-hadoop">Buat user penanggung jawab Hadoop</h4>
+<hr />
+<p><strong>:container</strong></p>
+<pre><code>root@hadoop-raw:# useradd -m -s /bin/bash hadoop
+root@hadoop-raw:# passwd hadoop 
+</code></pre>
+
+<h4 id="rubah-konfigurasi-ssh-server">Rubah konfigurasi ssh server</h4>
+<hr />
+<p>edit <em>/etc/ssh/ssh_config</em></p>
+<pre><code>Host *
+StrictHostKeyChecking no
+SendEnv LANG LC_*
+HashKnownHosts yes
+GSSAPIAuthentication yes
+GSSAPIDelegateCredentials no
+</code></pre>
+
+<p>edit <em>/etc/ssh/sshd_config</em></p>
+<pre><code>Port 22
+Protocol 2
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_dsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+UsePrivilegeSeparation yes
+
+KeyRegenerationInterval 3600
+ServerKeyBits 1024
+SyslogFacility AUTH
+LogLevel INFO
+LoginGraceTime 120
+PermitRootLogin prohibit-password
+StrictModes yes
+RSAAuthentication yes
+PubkeyAuthentication yes
+IgnoreRhosts yes
+RhostsRSAAuthentication no
+HostbasedAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+PasswordAuthentication yes
+X11Forwarding yes
+X11DisplayOffset 10
+PrintMotd no
+PrintLastLog yes
+TCPKeepAlive yes
+AcceptEnv LANG LC_*
+Subsystem sftp /usr/lib/openssh/sftp-server
+UsePAM yes
+</code></pre>
+
+<p>restart ssh server</p>
+<pre><code>root@hadoop-raw:# /etc/init.d/ssh restart
+root@hadoop-raw:# exit
+</code></pre>
+
+<p>Setelah exit,  login dengan ssh menggunakan hadoop user, untuk mencari ip address dari hadoop raw ini, di komputer host jalankan</p>
+<p><strong>:host</strong></p>
+<pre><code>myuser@desktop:~$ lxc list 
+</code></pre>
+
+<p>login lah dengan user baru</p>
+<pre><code>myuser@desktop:~$ ssh hadoop@ipaddress-nya-si-hadoop-raw
+</code></pre>
+
+<h4 id="upgrade-container">Upgrade Container</h4>
+<hr />
+<p><strong>:container</strong></p>
+<pre><code>hadoop@hadoop-raw:~$ sudo apt-get update
+hadoop@hadoop-raw:~$ sudo apt-get upgrade
+</code></pre>
+
+<h4 id="sesuaikan-zone-waktu">Sesuaikan Zone Waktu</h4>
+<hr />
+<pre><code>hadoop@hadoop-raw:~$ sudo dpk-reconfigure tzdata
+</code></pre>
+
+<h4 id="install-java">Install Java</h4>
+<hr />
+<pre><code>hadoop@hadoop-raw:~$ sudo apt install openjdk-8-jdk
+hadoop@hadoop-raw:~$ sudo apt-get install openjdk-8-jre
+</code></pre>
+
+<h4 id="install-hadoop-custom-package">Install Hadoop Custom Package</h4>
+<hr />
+<p>download deb package HadoopCustom-2.7.3.deb dan install</p>
+<pre><code>hadoop@hadoop-raw:~$ cd ~/
+hadoop@hadoop-raw:~$ wget https://aihub.id/repository/HadoopCustom-2.7.3.deb
+hadoop@hadoop-raw:~$ sudo dpkg -i ~/HadoopCustom-2.7.3.deb
+</code></pre>
+
+<p>Hadoop custom ini akan terinstall di <em>/opt/BigQ/hadoop/</em></p>
+<p>edit <em>/etc/environment</em></p>
+<pre><code>PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/BigQ/hadoop/bin:/opt/BigQ/hadoop/sbin&quot;
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre
+export HADOOP_HOME=/opt/BigQ/hadoop
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+export HADOOP_PREFIX=/opt/BigQ/hadoop
+export HADOOP_COMMON_LIB_NATIVE_DIR=/opt/BigQ/hadoop/lib/native
+export HADOOP_OPTS=&quot;-Djava.library.path=/opt/BigQ/hadoop/lib/native&quot;
+</code></pre>
+
+<h4 id="konfigurasi-hadoop">Konfigurasi Hadoop</h4>
+<hr />
+<p>edit <em>/opt/BigQ/hadoop/etc/hadoop/core-site.xml</em></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.default.name&lt;/name&gt;
+        &lt;value&gt;hdfs://hadoop-raw:9000&lt;/value&gt;
+     &lt;/property&gt;
+     &lt;property&gt;
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+        &lt;value&gt;/var/tmp&lt;/value&gt;
+        &lt;description&gt;A base for other temporary directories.&lt;/description&gt;
+     &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>create storage folder</p>
+<pre><code>hadoop@hadoop-raw:~$ sudo mkdir /var/local/hadoop/
+hadoop@hadoop-raw:~$ sudo chown hadoop:hadoop /var/local/hadoop
+</code></pre>
+
+<p>edit <em>/opt/BigQ/hadoop/etc/hadoop/hdfs-site.xml</em></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+&lt;configuration&gt;
+    &lt;property&gt;
+            &lt;name&gt;dfs.name.dir&lt;/name&gt;
+            &lt;value&gt;file:///var/local/hadoop/HDFS/data/namenode&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+            &lt;name&gt;dfs.data.dir&lt;/name&gt;
+            &lt;value&gt;file:///var/local/hadoop/HDFS/data/datanode&lt;/value&gt;
+    &lt;/property&gt;
+&lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;1&lt;/value&gt;
+        &lt;description&gt;Default block replication.&lt;/description&gt;
+&lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>edit <em>/opt/BigQ/hadoop/etc/hadoop/mapred-site.xml</em></p>
+<pre><code>&lt;configuration&gt;
+    &lt;property&gt;
+            &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+            &lt;value&gt;yarn&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+            &lt;name&gt;yarn.app.mapreduce.am.env&lt;/name&gt;
+            &lt;value&gt;HADOOP_MAPRED_HOME=$HADOOP_HOME&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+            &lt;name&gt;mapreduce.map.env&lt;/name&gt;
+            &lt;value&gt;HADOOP_MAPRED_HOME=$HADOOP_HOME&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+            &lt;name&gt;mapreduce.reduce.env&lt;/name&gt;
+            &lt;value&gt;HADOOP_MAPRED_HOME=$HADOOP_HOME&lt;/value&gt;
+    &lt;/property&gt;
+&lt;property&gt;
+        &lt;name&gt;yarn.app.mapreduce.am.resource.mb&lt;/name&gt;
+        &lt;value&gt;512&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+        &lt;name&gt;mapreduce.map.memory.mb&lt;/name&gt;
+        &lt;value&gt;256&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+        &lt;name&gt;mapreduce.reduce.memory.mb&lt;/name&gt;
+        &lt;value&gt;256&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+        &lt;name&gt;mapreduce.jobtracker.address&lt;/name&gt;
+        &lt;value&gt;localhost:54311&lt;/value&gt;
+        &lt;description&gt;MapReduce job tracker runs at this host and port.&lt;/description&gt;
+&lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>format hdfs</p>
+<pre><code>hadoop@hadoop-raw:~$ hadoop namenode -format
+</code></pre>
+
+<p>buat authorized keys untuk akses ke datanode dari hadoop-raw tanpa login, pada saat proses pembuatan key jangan memasukan pass phrase.</p>
+<pre><code>hadoop@hadoop-raw:~$ ssh-keygen - t rsa
+hadoop@hadoop-raw:~$ cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+</code></pre>
+
+<p>Clean up history dan lainnya</p>
+<pre><code>hadoop@hadoop-raw:~$ rm ~/HadoopCustom-2.3.1.deb
+hadoop@hadoop-raw:~$ history -c
+hadoop@hadoop-raw:~$ exit
+</code></pre>
+
+<h4 id="create-image-template-hadoop-dari-container">Create Image Template Hadoop dari Container</h4>
+<hr />
+<p><strong>:host</strong></p>
+<pre><code>myuser@desktop:~$ lxc stop hadoop-raw
+myuser@desktop:~$ lxc publish hadoop-raw --alias hadoop-image
+myuser@desktop:~$ lxc image list
+myuser@desktop:~$ lxc delete hadoop-raw
+</code></pre>
+
+<p>Sampai dengan tahap ini kita sudah mempunyai beberapa image yaitu <strong>barebone</strong> dan  <strong>hadoop-image</strong></p>
+<h3 id="installasi-apache-spark">Installasi Apache Spark</h3>
+<hr />
+<p><strong>:host</strong></p>
+<pre><code>myuser@desktop:~$ lxc launch hadoop-image spark-raw
+myuser@desktop:~$ lxc exec spark-raw -- /bin/bash
+</code></pre>
+
+<h4 id="buat-user-penanggung-jawab-spark">Buat user penanggung jawab Spark</h4>
+<hr />
+<p><strong>:container</strong></p>
+<pre><code>root@spark-raw:# useradd -m -s /bin/bash spark
+root@spark-raw:# passwd spark
+root@spark-raw:# exit
+</code></pre>
+
+<p>Setelah exit,  login dengan ssh menggunakan spark user, untuk mencari ip address dari spark-raw ini, di komputer host jalankan</p>
+<p><strong>:host</strong></p>
+<pre><code>myuser@desktop:~$ lxc list
+</code></pre>
+
+<p>login lah dengan user baru</p>
+<pre><code>myuser@desktop:~$ ssh spark@ipaddress-nya-si-spark-raw
+</code></pre>
+
+<h4 id="install-spark-custom-package">Install Spark Custom Package</h4>
+<hr />
+<p><strong>:container</strong></p>
+<p>masih dengan login dengan username spark, download deb package SparkCustom-2.3.1.deb dan install</p>
+<pre><code>spark@spark-raw:~$ wget http://aihub.id/repository/SparkCustom-2.3.1.deb
+spark@spark-raw:~$ sudo dpkg -i ~/SparkCustom-2.3.1.deb
+</code></pre>
+
+<p>Spark custom ini akan terinstall di <em>/opt/BigQ/spark/</em></p>
+<p>edit <em>/etc/environment</em></p>
+<pre><code>PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/BigQ/hadoop/bin:/opt/BigQ/hadoop/sbin:/opt/BigQ/spark/bin:/opt/BigQ/spark/sbin&quot;
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre
+export HADOOP_HOME=/opt/BigQ/hadoop
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+export HADOOP_PREFIX=/opt/BigQ/hadoop
+export HADOOP_COMMON_LIB_NATIVE_DIR=/opt/BigQ/hadoop/lib/native
+export HADOOP_OPTS=&quot;-Djava.library.path=/opt/BigQ/hadoop/lib/native&quot;
+export SPARK_HOME=/opt/BigQ/spark 
+export PYSPARK_PYTHON=python3.5 
+export SPARK_CLASSPATH=/opt/BigQ/spark/jdbc
+</code></pre>
+
+<p>edit <em>/opt/BigQ/spark/spark-env.sh</em> Kosongkan isian SPARK_MASTER_HOST.</p>
+<pre><code>#!/usr/bin/env bash
+SPARK_MASTER_HOST=
+</code></pre>
+
+<p>Finishing dan clean up</p>
+<pre><code>spark@spark-raw:~$ sudo rm /home/hadoop/.ssh/authorized_keys
+spark@spark-raw:~$ sudo rm /home/hadoop/.ssh/id_rsa
+spark@spark-raw:~$ sudo /home/hadoop/.ssh/id_rsa.pub
+spark@spark-raw:~$ sudo echo &quot;&quot; &gt; /home/hadoop/.ssh/known_hosts
+spark@spark-raw:~$ rm ~/SparkCustom-2.3.1.deb
+spark@spark-raw:~$ history -c
+spark@spark-raw:~$ exit
+</code></pre>
+
+<h4 id="create-image-template-spark-dari-container">Create Image Template Spark dari Container</h4>
+<hr />
+<p><strong>:host</strong></p>
+<pre><code>myuser@desktop:~$ lxc stop spark-raw
+myuser@desktop:~$ lxc publish spark-raw --alias spark-image
+myuser@desktop:~$ lxc image list
+myuser@desktop:~$ lxc delete spark-raw
+</code></pre>
+
+<p>Sampai dengan tahap ini kita sudah mempunyai beberapa image yaitu <strong>barebone</strong>,  <strong>spark-image</strong> dan <strong>hadoop-image</strong></p>
+<h3 id="installasi-bigq-manager">Installasi BigQ Manager</h3>
+<hr />
+<p>Front end dari BigQ Manager adalah Odoo Framework 11.0 ,  untuk membuat container BigQ Manager, yang harus dijadikan bahan baku image adalah spark-image</p>
+<p><strong>:host</strong></p>
+<pre><code>myuser@desktop:~$ lxc launch spark-image bigq-raw
+myuser@desktop:~$ lxc exec bigq-raw -- /bin/bash
+</code></pre>
+
+<p><strong>:container</strong></p>
+<pre><code>root@bigq-raw:# useradd -m -s /bin/bash masteruser
+root@bigq-raw:# passwd spark
+root@bigq-raw:# exit
+</code></pre>
+
+<p><strong>:host</strong></p>
+<p>lihat ip address bigq-raw dengan cara :</p>
+<pre><code>myuser@desktop:~$ lxc list
+</code></pre>
+
+<p>login dengan ssh ke dalam bigq-raw dengan menggunakan masteruser.  </p>
+<pre><code>myuser@desktop:~$ ssh masteruser@ipaddress-nya-si-bigq-raw
+</code></pre>
+
+<p>di dalam image baru bigq-raw ini terdapat beberapa user hasil dari pembuatan image hadoop-image dan spark image terdahulu, proses pertama adalah rekonfigurasi server.</p>
+<p><strong>:container</strong></p>
+<pre><code>masteruser@bigq-raw:-$ sudo chown -R masteruser:masteruser /opt/BigQ/hadoop
+masteruser@bigq-raw:-$ sudo chown -R masteruser:masteruser /opt/BigQ/spark
+masteruser@bigq-raw:-$ sudo rm /var/tmp/*
+masteruser@bigq-raw:-$ sudo rm -r /var/local/hadoop
+masteruser@bigq-raw:-$ sudo userdel -r spark
+masteruser@bigq-raw:-$ sudo userdel -r hadoop
+</code></pre>
+
+<h4 id="installasi-python3-development">Installasi python3 development</h4>
+<hr />
+<pre><code>masteruser@bigq-raw:-$ sudo apt-get install python3-pip
+masteruser@bigq-raw:-$ sudo apt-get install npm
+masteruser@bigq-raw:-$ sudo ln -s /usr/bin/nodejs /usr/bin/node
+masteruser@bigq-raw:-$ sudo npm install -g less less-plugin-clean-css
+masteruser@bigq-raw:-$ sudo apt-get install node-less
+masteruser@bigq-raw:-$ sudo apt-get install postgresql
+</code></pre>
+
+<h4 id="installasi-custom-odoo-11-server">Installasi Custom Odoo 11 Server</h4>
+<hr />
+<p><strong>:container</strong></p>
+<pre><code>masteruser@bigq-raw:-$ sudo adduser --system --home=/opt/BigQ/odoo --group odoo
+</code></pre>
+
+<p>Konfigurasi postgresql buat beberapa user postgres yaitu odoo (user odoo), masteruser (user masteruser) dan jdbcmaster (user yang akan bertindak sebagai proxy lintas komunikasi system BigQ Manager dengan framework Odoo 11)</p>
+<pre><code>masteruser@bigq-raw:-$ sudo su postgres
+postgres@bigq-raw:/home/masteruser$ cd
+postgres@bigq-raw:~$ create user -s odoo
+postgres@bigq-raw:~$ create user -s masteruser
+postgres@bigq-raw:~$ create user -s jdbcmaster
+
+postgres@bigq-raw:~$ psql
+postgres=# ALTER USER jdbcmaster WITH PASSWORD 'jdbcmaster';
+postgres=# \q
+
+postgres@bigq-raw:~$ exit
+</code></pre>
+
+<p>edit <em>/etc/postgresql/9.5/main/pg_hba.conf</em></p>
+<pre><code>local   all             postgres                                peer
+local   all             odoo                                    peer
+local   all             masteruser                              peer
+local   all             jdbcmaster                              md5
+
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+# &quot;local&quot; is for Unix domain socket connections only
+local   all             all                                     peer
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+</code></pre>
+
+<p>edit <em>/etc/postgresql/9.5/main/postgresql.conf</em></p>
+<pre><code>listen_address = '*'  menjadi listen_address = 'localhost' (dan buang '#')
+</code></pre>
+
+<p>restart postgresql</p>
+<pre><code>masteruser@bigq-raw:-$ sudo /etc/init.d/postgresql restart
+</code></pre>
+
+<p>Test proxy connection dengan user jdbcmaster</p>
+<pre><code>masteruser@bigq-raw:-$ createdb testing
+masteruser@bigq-raw:-$ psql testing
+testing=# \du
+testing=# \q
+masteruser@bigq-raw:-$ psql -U jdbcmaster -W
+testing=# \q
+masteruser@bigq-raw:-$ dropdb testing
+</code></pre>
+
+<p>masih dengan login dengan username masteruser, download deb package OdooCustom-11.deb dan install</p>
+<pre><code>masteruser@bigq-raw:-$ cd ~/
+masteruser@bigq-raw:-$ wget http://aihub.id/repository/OdooCutom-11.deb
+masteruser@bigq-raw:-$ sudo dpkg -i ~/OdooCustom-2.3.1.deb
+</code></pre>
+
+<p>Odoo 11 custom ini akan terinstall di <em>/opt/BigQ/odoo/server</em>, download deb package AdditionalConfig-1.0.deb</p>
+<pre><code>masteruser@bigq-raw:-$ cd ~/
+masteruser@bigq-raw:-$ wget http://aihub.id/repository/AdditionalConfig-1.0.deb
+masteruser@bigq-raw:-$ sudo dpkg -i ~/AdditionalConfig-1.0.deb
+</code></pre>
+
+<p>Installasi AdditionalConfig-1.0.deb tersebut akan menghasilkan beberapa direktori di /opt/BigQ yaitu</p>
+<blockquote>
+<p>/opt/BigQ/payload
+/opt/BigQ/payload/config
+/opt/BigQ/payload/data
+/opt/BigQ/payload/images
+/opt/BigQ/payload/modules
+/opt/BigQ/payload/scripts</p>
+</blockquote>
+<p>Install python library</p>
+<pre><code>masteruser@bigq-raw:-$ sudo -H pip3 install Cython Babel decorator docutils ebaysdk feedparser gevent greenlet html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject Werkzeug XlsxWriter xlwt xlrd  psycopg2-binary phonenumbers pandoc gdata
+</code></pre>
+
+<p>Install BigQ Manager Dependencies</p>
+<pre><code>masteruser@bigq-raw:-$ cd ~/
+masteruser@bigq-raw:-$ wget https://aihub.id/repository/pyspark-2.3.1.tar.gz
+masteruser@bigq-raw:-$ tar -xvf pyspark-2.3.1.tar.gz
+masteruser@bigq-raw:-$ mv pyspark-2.3.1 pyspark
+masteruser@bigq-raw:-$ cd pyspark
+masteruser@bigq-raw:-$ sudo python3 setup.py install
+masteruser@bigq-raw:-$ sudo -H pip3 install python-dotenv crypthography uuid
+masteruser@bigq-raw:-$ sudo -H pip3 install pandas==0.24
+masteruser@bigq-raw:-$ sudo -H pip3 install pyarrow
+</code></pre>
+
+<p>Test jalankan BigQ Manager</p>
+<pre><code>masteruser@bigq-raw:-$ /opt/BigQ/odoo/server/odoo-bin
+</code></pre>
+
+<p><strong>:host</strong></p>
+<p>Di komputer host, download BigQ Manager Data, BigQ Manager Data tersedia dalam beberapa rilis, download sesuai dengan lisensi yang anda punya</p>
+<ol>
+<li>BigQ_Manager_Standard_V.2.1.zip</li>
+<li>BigQ_Manager_Government_V.2.1.zip</li>
+</ol>
+<pre><code>myuser@desktop:-$ cd ~/Download
+myuser@desktop:-$ wget https://aihub.id/repository/BigQ_Manager_Standard_V.2.1.zip
+</code></pre>
+
+<p>Cari ip address bigq-raw</p>
+<pre><code>myuser@desktop:-$ lxc list
+</code></pre>
+
+<blockquote>
+<p>Buka browser (chrome atau Firefox), ketikan url http://ip-address-nya-bigq-raw:8069/web/database/manager</p>
+</blockquote>
+<p>Klik button Restore Database, di ops "Choose File" klik dan pilih file BigQ Manager Data yang telah didownload sebelumnya (nomor 1-3 sesuai dengan versi release masing masing). Setelah proses restore selesai, loginlah dengan username 'admin' dan password '1234567' jika semua berjalan dengan baik, logout dari system BigQ Manager.</p>
+<p>Fokuskan kembali ke terminal container yang sedang berjalan dan ketikan ctrl+c dua kali  </p>
+<p><strong>:container</strong></p>
+<p>Lihat services yang sedang berjalan, dan pastikan hanya port 22 dan 5432 yang masih berjalan</p>
+<pre><code>masteruser@bigq-raw:-$ netstat -anpt
+</code></pre>
+
+<p>Lakukan pembersihan akhir di container</p>
+<pre><code>masteruser@bigq-raw:-$ rm ~/OdooCustom-2.3.1.deb
+masteruser@bigq-raw:-$ rm ~/AdditionalConfig-1.0.deb
+masteruser@bigq-raw:-$ rm -r ~/pyspark
+masteruser@bigq-raw:-$ rm pyspark-2.3.1.tar.gz
+masteruser@bigq-raw:-$ history -c
+masteruser@bigq-raw:-$ exit
+</code></pre>
+
+<p><strong>:host</strong></p>
+<pre><code>myuser@desktop:-$ lxc stop bigq-raw
+myuser@desktop:-$ lxc publish bigq-raw --alias BigQ-image
+myuser@desktop:-$ lxc delete bigq-raw
+</code></pre>
+
+<p>Sampai dengan tahap ini kita sudah mempunyai beberapa image yaitu <strong>barebone</strong>, <strong>hadoop-image</strong> , <strong>spark-image</strong> dan <strong>BigQ-image</strong>.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../opensource/" class="btn btn-neutral" title="Teknologi"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../opensource/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
