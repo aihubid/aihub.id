@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Post Install - My Docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Post Install";
+    var mkdocs_page_input_path = "post.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> My Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../opensource/">Teknologi</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installasi/">Installasi</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Post Install</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#post-install">Post Install</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#perencanaan-kapasitas-capacity-planning">Perencanaan Kapasitas (Capacity Planning)</a></li>
+        
+            <li><a class="toctree-l3" href="#pengaturan-container-dan-ip-address">Pengaturan Container dan IP Address</a></li>
+        
+            <li><a class="toctree-l3" href="#template-konfigurasi">Template Konfigurasi</a></li>
+        
+            <li><a class="toctree-l3" href="#test-running">Test Running</a></li>
+        
+            <li><a class="toctree-l3" href="#running-semua-sistem">Running Semua Sistem</a></li>
+        
+            <li><a class="toctree-l3" href="#memberhentikan-layanan">Memberhentikan Layanan</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">My Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Post Install</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="post-install">Post Install</h3>
+<hr />
+<p>Seperti diterangkan dalam proses akhir installasi, image yang sudah dibuat adalah :</p>
+<ol>
+<li>barebone, Image Ubuntu 16.04</li>
+<li>haddop-image</li>
+<li>spark-image</li>
+<li>dan BigQ-image</li>
+</ol>
+<p>image barebone cukup disimpan untuk kepentingan lainya dikemudian waktu, hadoop-image, spark-image dan BigQ Image lah yang akan kita pakai.</p>
+<h5 id="perencanaan-kapasitas-capacity-planning">Perencanaan Kapasitas (Capacity Planning)</h5>
+<hr />
+<p>BigQ Image akan bertindak sebagai Command Center, untuk Hadoop kita akan pakai 3 (1 master dan 2 data node), Spark akan kita pakai 3 (1 master dan 2 slaves) dengan konfigurasi host dan static ip-address (sesuaikan kondisi dengan konfigurasi anda sendiri) adalah sebagai berikut :</p>
+<table>
+<thead>
+<tr>
+<th>Image</th>
+<th>Hostname</th>
+<th>Static Ip</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BigQ-image</td>
+<td>BigQ-Manager1</td>
+<td>10.10.10.100</td>
+</tr>
+<tr>
+<td>hadoop-image</td>
+<td>hadoop-master1</td>
+<td>10.10.10.101</td>
+</tr>
+<tr>
+<td>hadoop-image</td>
+<td>data-node1</td>
+<td>10.10.10.102</td>
+</tr>
+<tr>
+<td>hadoop-image</td>
+<td>data-node2</td>
+<td>10.10.10.103</td>
+</tr>
+<tr>
+<td>spark-image</td>
+<td>spark-master1</td>
+<td>10.10.10.104</td>
+</tr>
+<tr>
+<td>spark-image</td>
+<td>spark-slave1</td>
+<td>10.10.10.104</td>
+</tr>
+<tr>
+<td>spark-image</td>
+<td>spark-slave2</td>
+<td>10.10.10.105</td>
+</tr>
+<tr>
+<td>Komputer Host</td>
+<td>desktop</td>
+<td>192.168.1.10</td>
+</tr>
+</tbody>
+</table>
+<p>Kita hanya perlu membuat  beberapa container dari image yang sudah kita buat diproses installasi, dimana sumber image nya adalah yaitu BigQ-image, hadoop-image dan spark-image. Pastikan semua container tidak ada yang jalan, untuk memastikannya dapat dilihat dengan perintah :</p>
+<p><strong>:host</strong></p>
+<pre><code>myuser@desktop:~$ lxc list
+</code></pre>
+
+<p>Jika ada container yang sedang berjalan, stop container tersebut dengan perintah</p>
+<pre><code>myuser@desktop:~$  lxc stop &lt;nama-container&gt;
+</code></pre>
+
+<h5 id="pengaturan-container-dan-ip-address">Pengaturan Container dan IP Address</h5>
+<hr />
+<p>Buat container BigQ-Manager dan set static ip address untuk dirinya</p>
+<pre><code>myuser@desktop:~$ lxc launch BigQ-image BigQ-Manager1
+myuser@desktop:~$ lxc stop BigQ-Manager1
+myuser@desktop:~$ lxc network attach lxdbr0 BigQ-Manager1 eth0 eth0
+myuser@desktop:~$ config device set BigQ-Manager1 eth0 ipv4.address 10.10.10.100
+</code></pre>
+
+<p>Buat container hadoop-master.</p>
+<pre><code>myuser@desktop:~$ lxc launch hadoop-image hadoop-master1
+myuser@desktop:~$ lxc stop hadoop-master1
+myuser@desktop:~$ lxc network attach lxdbr0 hadoop-master1 eth0 eth0
+myuser@desktop:~$ config device set hadoop-master1 eth0 ipv4.address 10.10.10.101
+</code></pre>
+
+<p>Buat container data-node1.</p>
+<pre><code>myuser@desktop:~$ lxc launch hadoop-image data-node1
+myuser@desktop:~$ lxc stop data-node1
+myuser@desktop:~$ lxc network attach lxdbr0 data-node1 eth0 eth0
+myuser@desktop:~$ config device set data-node1 eth0 ipv4.address 10.10.10.102
+</code></pre>
+
+<p>Buat container data-node2.</p>
+<pre><code>myuser@desktop:~$ lxc launch hadoop-image data-node2
+myuser@desktop:~$ lxc stop data-node2
+myuser@desktop:~$ lxc network attach lxdbr0 data-node2 eth0 eth0
+myuser@desktop:~$ config device set data-node1 eth0 ipv4.address 10.10.10.103
+</code></pre>
+
+<p>Buat container spark-master1</p>
+<pre><code>myuser@desktop:~$ lxc launch spark-image spark-master1
+myuser@desktop:~$ lxc stop spark-master1
+myuser@desktop:~$ lxc network attach lxdbr0 spark-master1 eth0 eth0
+myuser@desktop:~$ config device set spark-master1 eth0 ipv4.address 10.10.10.104
+</code></pre>
+
+<p>Buat container spark-slave1</p>
+<pre><code>myuser@desktop:~$ lxc launch spark-image spark-slave1
+myuser@desktop:~$ lxc stop spark-slave1
+myuser@desktop:~$ lxc network attach lxdbr0 spark-slave1 eth0 eth0
+myuser@desktop:~$ config device set spark-slave1 eth0 ipv4.address 10.10.10.105
+</code></pre>
+
+<p>Buat container spark-slave2</p>
+<pre><code>myuser@desktop:~$ lxc launch spark-image spark-slave2
+myuser@desktop:~$ lxc stop spark-slave2
+myuser@desktop:~$ lxc network attach lxdbr0 spark-slave2 eth0 eth0
+myuser@desktop:~$ config device set spark-slave2 eth0 ipv4.address 10.10.10.106
+</code></pre>
+
+<p>Buat hosts di komputer host, diasumsikan mengedit dengan aplikasi text editor nano :</p>
+<pre><code>myuser@desktop:~$ sudo nano /etc/hosts
+</code></pre>
+
+<p>Tambahkan semua entry container yang sudah dibuat, dan simpan dengan CTRL-O</p>
+<pre><code>127.0.0.1           localhost
+10.10.10.100        BigQ-Manager1
+10.10.10.101        hadoop-master1
+10.10.10.102        data-node1
+10.10.10.103        data-node2
+10.10.10.104        spark-master1
+10.10.10.105        spark-slave1
+10.10.10.106        spark-slave2
+</code></pre>
+
+<p>artinya, komputer host dapat mengakses semua container berdasarkan host masing masing agar lebih mudah.</p>
+<h5 id="template-konfigurasi">Template Konfigurasi</h5>
+<hr />
+<p>Agar lebih mudah dalam mereplikasi, buatlah sebuah projek, simpan dalam folder khusus dan buat beberapa konfigurasi dalam folder tersebut,  home direktori pengguna, dalam artikel ini adalah /home/myuser</p>
+<pre><code>myuser@desktop:~$ mkdir /home/myuser/project1
+</code></pre>
+
+<p>buat file core-site.xml, sunting dan simpan</p>
+<pre><code>myuser@desktop:~$ nano /home/myuser/project1/core-site.xml
+</code></pre>
+
+<p>Sunting seperti di bawah ini :</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; 
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt; 
+&lt;configuration&gt;     
+    &lt;property&gt;         
+        &lt;name&gt;fs.default.name&lt;/name&gt;         
+        &lt;value&gt;hdfs://hadoop-master1:9000&lt;/value&gt;      
+    &lt;/property&gt;      
+    &lt;property&gt;         
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;         
+        &lt;value&gt;/var/tmp&lt;/value&gt;
+        &lt;description&gt;A base for other temporary directories.&lt;/description&gt;                  &lt;/property&gt; 
+&lt;/configuration&gt;
+</code></pre>
+
+<p>buat file mapred-site.xml, sunting dan simpan.</p>
+<pre><code>myuser@desktop:~$ nano /home/myuser/project1/mapred-site.xml
+</code></pre>
+
+<p>Sunting seperti di bawah ini :</p>
+<pre><code>&lt;configuration&gt;
+    &lt;property&gt;
+            &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+            &lt;value&gt;yarn&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+            &lt;name&gt;yarn.app.mapreduce.am.env&lt;/name&gt;
+            &lt;value&gt;HADOOP_MAPRED_HOME=$HADOOP_HOME&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+            &lt;name&gt;mapreduce.map.env&lt;/name&gt;
+            &lt;value&gt;HADOOP_MAPRED_HOME=$HADOOP_HOME&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+            &lt;name&gt;mapreduce.reduce.env&lt;/name&gt;
+            &lt;value&gt;HADOOP_MAPRED_HOME=$HADOOP_HOME&lt;/value&gt;
+    &lt;/property&gt;
+&lt;property&gt;
+        &lt;name&gt;yarn.app.mapreduce.am.resource.mb&lt;/name&gt;
+        &lt;value&gt;512&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+        &lt;name&gt;mapreduce.map.memory.mb&lt;/name&gt;
+        &lt;value&gt;256&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+        &lt;name&gt;mapreduce.reduce.memory.mb&lt;/name&gt;
+        &lt;value&gt;256&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+        &lt;name&gt;mapreduce.jobtracker.address&lt;/name&gt;
+        &lt;value&gt;hadoop-master1:54311&lt;/value&gt;
+        &lt;description&gt;MapReduce job tracker runs at this host and port.&lt;/description&gt;
+&lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>Buat file hadoop-hosts, sunting dan simpan</p>
+<pre><code>myuser@desktop:~$ nano /home/myuser/project1/hadoop-hosts
+</code></pre>
+
+<p>Sunting seperti di bawah ini :</p>
+<pre><code>127.0.0.1           localhost
+10.10.10.101        hadoop-master1
+10.10.10.102        data-node1
+10.10.10.103        data-node2
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+</code></pre>
+
+<p>Biasanya bari ipv6 sudah otomatis diberikan.</p>
+<p>Buat file hadoop slaves, sunting dan simpan</p>
+<pre><code>myuser@desktop:~$ nano /home/myuser/project1/slaves
+</code></pre>
+
+<p>Sunting seperti di bawah ini :</p>
+<pre><code>10.10.10.102        data-node1
+10.10.10.103        data-node2
+</code></pre>
+
+<p>Buat file hadoop workers, sunting dan simpan</p>
+<pre><code>myuser@desktop:~$ nano /home/myuser/project1/workers
+</code></pre>
+
+<p>Sunting seperti di bawah ini :</p>
+<pre><code>10.10.10.102        data-node1
+10.10.10.103        data-node2
+</code></pre>
+
+<p>Buat file spark-hosts, sunting dan simpan</p>
+<pre><code>myuser@desktop:~$ nano /home/myuser/project1/spark-hosts
+</code></pre>
+
+<p>Sunting seperti di bawah ini :</p>
+<pre><code>10.10.10.104        spark-master1
+10.10.10.105        spark-slave1
+10.10.10.106        spark-slave2
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+</code></pre>
+
+<p>Buat file spark-env.sh, sunting dan edit</p>
+<pre><code>#!/usr/bin/env bash
+SPARK_MASTER_HOST = spark-master1
+</code></pre>
+
+<p>beri mode eksekusi file spark-env.sh tersebut :</p>
+<pre><code>myuser@desktop:~$ chmod +x /home/myuser/project1/spark-env.sh
+</code></pre>
+
+<p>dari semua proses pembuatan konfigurasi di atas, jika dilihat secara tree view adalah sebagai berikut :</p>
+<pre><code>-/home/myuser/project1/
+--- core-site.xml
+--- mapred-site.xml
+--- hadoop-hosts
+--- slaves
+--- workers
+--- spark-hosts
+--- spark-env.sh
+</code></pre>
+
+<h5 id="test-running">Test Running</h5>
+<hr />
+<p>Jalankan secara sequential (berurutan) masing masing container :</p>
+<pre><code>myuser@desktop:~$ cd /home/myuser/project1
+myuser@desktop:~$ lxc start data-node2
+myuser@desktop:~$ lxc start data-node1
+myuser@desktop:~$ lxc start hadoop-master1
+myuser@desktop:~$ lxc start spark-slave2
+myuser@desktop:~$ lxc start spark-slave1
+myuser@desktop:~$ lxc start spark-master1
+myuser@desktop:~$ lxc start BigQ-Manager1
+</code></pre>
+
+<p>Upload file core-site.xml yang telah dibuat di atas :</p>
+<pre><code>myuser@desktop:~$ lxc file push core-site.xml hadoop-master1/opt/BigQ/hadoop/etc/hadoop/core-site.xml .
+
+myuser@desktop:~$ lxc file push core-site.xml data-node1/opt/BigQ/hadoop/etc/hadoop/core-site.xml .
+
+myuser@desktop:~$ lxc file push core-site.xml data-node2/opt/BigQ/hadoop/etc/hadoop/core-site.xml .
+</code></pre>
+
+<p>perhatikan tanda . (titik) diakhir perintah, tanda . (titik) tersebut merupakan bagian dari perintah</p>
+<p>Upload file mapred-site.xml yang telah dibuat di atas :</p>
+<pre><code>myuser@desktop:~$ lxc file push mapred-site.xml hadoop-master1/opt/BigQ/hadoop/etc/hadoop/mapred-site.xml .
+
+myuser@desktop:~$ lxc file push mapred-site.xml data-node1/opt/BigQ/hadoop/etc/hadoop/mapred-site.xml .
+
+myuser@desktop:~$ lxc file push mapred-site.xml data-node2/opt/BigQ/hadoop/etc/hadoop/mapred-site.xml .
+</code></pre>
+
+<p>Upload file slaves dan workers yang telah dibuat di atas :</p>
+<pre><code>myuser@desktop:~$ lxc file push slaves hadoop-master1/opt/BigQ/hadoop/etc/hadoop/slaves .
+myuser@desktop:~$ lxc file push workers hadoop-master1/opt/BigQ/hadoop/etc/hadoop/workers .
+</code></pre>
+
+<p>Upload file hadoop-hosts yang telah dibuat di atas, sebagai file hosts :</p>
+<pre><code>myuser@desktop:~$ lxc file push hadoop-hosts hadoop-master1/etc/hosts .
+myuser@desktop:~$ lxc file push hadoop-hosts data-node1/etc/hosts .
+myuser@desktop:~$ lxc file push hadoop-hosts data-node2/etc/hosts .
+</code></pre>
+
+<p>Upload file spark-hosts yang telah dibuat di atas, sebagai file hosts :</p>
+<pre><code>myuser@desktop:~$ lxc file push spark-hosts spark-master1/etc/hosts .
+myuser@desktop:~$ lxc file push spark-hosts spark-slave1/etc/hosts .
+myuser@desktop:~$ lxc file push spark-hosts spark-slave2/etc/hosts .
+</code></pre>
+
+<p>Upload file spark-env.sh yang telah dibuat di atas  :</p>
+<pre><code>myuser@desktop:~$ lxc file push spark-env.sh spark-master1/BigQ/spark/conf/spark-env.sh .
+myuser@desktop:~$ lxc file push spark-env.sh spark-slave1/BigQ/spark/conf/spark-env.sh .
+myuser@desktop:~$ lxc file push spark-env.sh spark-slave2/BigQ/spark/conf/spark-env.sh .
+</code></pre>
+
+<p>Rubah kepemilikan core-site.xml, mapred-site.xml dan spark-env.sh</p>
+<pre><code>myuser@desktop:~$ lxc exec hadoop-master1 bash -ilc &quot;/usr/bin/chown &lt;user-hadoop&gt;:&lt;group hadoop&gt; /opt/BigQ/hadoop/etc/hadoop/core-site.xml&quot;
+
+myuser@desktop:~$ lxc exec data-node1 bash -ilc &quot;/usr/bin/chown &lt;user-hadoop&gt;:&lt;group hadoop&gt; /opt/BigQ/hadoop/etc/hadoop/core-site.xml&quot;
+
+myuser@desktop:~$ lxc exec data-node1 bash -ilc &quot;/usr/bin/chown &lt;user-hadoop&gt;:&lt;group hadoop&gt; /opt/BigQ/hadoop/etc/hadoop/core-site.xml&quot;
+
+</code></pre>
+
+<p>Lakukan perintah di atas untuk mapred-site.xml (hadoop) dan spark-env.sh (spark), adapun lokasi config file hadoop adalah <strong>/opt/BigQ/hadoop/etc/hadoop</strong> sementara config file spark adalah <strong>/opt/BigQ/spark/conf</strong></p>
+<h5 id="running-semua-sistem">Running Semua Sistem</h5>
+<hr />
+<p>Jalankan semua service dengan perintah sebagai berikut :</p>
+<pre><code>myuser@desktop:~$ lxc exec hadoop-master1 -- sudo --login --user hadoop bash -ilc &quot;. /etc/environment &amp;&amp; /opt/BigQ/hadoop/sbin/start-dfs.sh&quot;
+
+myuser@desktop:~$ lxc exec hadoop-master1 -- sudo --login --user hadoop bash -ilc &quot;. /etc/environment &amp;&amp; /opt/BigQ/hadoop/sbin/start-yarn.sh&quot;
+
+myuser@desktop:~$ lxc exec spark-master1 -- sudo --login --user spark bash -ilc &quot;. /etc/environment &amp;&amp; /opt/BigQ/spark/sbin/start-master.sh&quot;
+
+myuser@desktop:~$ lxc exec spark-slave1 -- sudo --login --user spark bash -ilc  &quot;. /etc/environment &amp;&amp; /opt/BigQ/spark/sbin/start-slave.sh spark://10.10.10.105:7077&quot;
+
+myuser@desktop:~$ lxc exec spark-slave2 -- sudo --login --user spark bash -ilc  &quot;. /etc/environment &amp;&amp; /opt/BigQ/spark/sbin/start-slave.sh spark://10.10.10.106:7077&quot;
+
+myuser@desktop:~$ lxc exec odoo-server -- sudo --login --user masteruser bash -ilc &quot;. /etc/environment &amp;&amp; /opt/BigQ/odoo/server/odoo-bin &amp;&quot;
+
+</code></pre>
+
+<p>Cek ricek apakah hadoop dan spark sudah berjalan dengan baik, pada komputer host, buka browser dan arahkan url ke http://hadoop-master1:9000 serta http://spark-master1:8080 , untuk diingat bahwa layanan (services) hadoop dan spark beserta informasi di url di atas hanya dapat dilihat di host komputer dikarenakan sistem keamanan subnet isolated.</p>
+<p>AIHUB BigQ-Manager dilengkapi dengan sistem one touch delivery, artinya semua proses post install dari atas sampai ke bawah ini, cukup dengan pengaturan web interface yang dapat dijalankan dengan mudah.</p>
+<h5 id="memberhentikan-layanan">Memberhentikan Layanan</h5>
+<hr />
+<p>Hati hati dalam memberhentikan layanan, terutama di Hadoop, karena terkait dengan data node dan blok blok penyimpanan, jika memang harus, ikuti perintah berurutan sebagai berikut :</p>
+<pre><code>myuser@desktop:~$ lxc exec hadoop-master1 -- sudo --login --user hadoop bash -ilc &quot;. /etc/environment &amp;&amp; /opt/BigQ/hadoop/sbin/stop-yarn.sh&quot;
+
+myuser@desktop:~$ lxc exec hadoop-master1 -- sudo --login --user hadoop bash -ilc &quot;. /etc/environment &amp;&amp; /opt/BigQ/hadoop/sbin/stop-dfs.sh&quot;
+
+myuser@desktop:~$ lxc exec spark-slave1 -- sudo --login --user spark bash -ilc &quot;. /etc/environment &amp;&amp; /opt/BigQ/spark/sbin/stop-slave.sh&quot;
+
+myuser@desktop:~$ lxc exec spark-slave2 -- sudo --login --user spark bash -ilc &quot;. /etc/environment &amp;&amp; /opt/BigQ/spark/sbin/stop-slave.sh&quot;
+
+myuser@desktop:~$ lxc exec spark-master -- sudo --login --user spark bash -ilc &quot;. /etc/environment &amp;&amp; /opt/BigQ/spark/sbin/stop-master.sh&quot;
+
+myuser@desktop:~$ lxc stop data-node1
+myuser@desktop:~$ lxc stop data-node2
+myuser@desktop:~$ lxc stop hadoop-master1
+myuser@desktop:~$ lxc stop spark-slave1
+myuser@desktop:~$ lxc stop spark-slave2
+myuser@desktop:~$ lxc stop BigQ-Manager1
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../installasi/" class="btn btn-neutral" title="Installasi"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../installasi/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
